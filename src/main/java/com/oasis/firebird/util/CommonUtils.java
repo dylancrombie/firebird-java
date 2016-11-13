@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import javax.crypto.SecretKeyFactory;
@@ -27,16 +28,16 @@ public class CommonUtils {
 
 	public static String getSimpleCalendarDescription(Calendar calendar) {
 
-		return getSimpleCalendar(calendar, new SimpleDateFormat("dd.MM.yyyy '@' HH:mm"), false);
+		return getSimpleCalendar(calendar, new SimpleDateFormat("dd.MM.yyyy '@' HH:mm", Locale.ENGLISH), false);
 
 	}
 
 	public static String getSimpleCalendarDescriptionServer(Calendar calendar) {
 
 		if (calendar.get(Calendar.SECOND) == 0) {
-			return getSimpleCalendar(calendar, new SimpleDateFormat("dd.MM.yyyy '@' HH:mm"), false);
+			return getSimpleCalendar(calendar, new SimpleDateFormat("dd.MM.yyyy '@' HH:mm", Locale.ENGLISH), false);
 		} else {
-			return getSimpleCalendar(calendar, new SimpleDateFormat("dd.MM.yyyy '@' HH:mm:ss"), true);
+			return getSimpleCalendar(calendar, new SimpleDateFormat("dd.MM.yyyy '@' HH:mm:ss", Locale.ENGLISH), true);
 		}
 
 	}
@@ -52,17 +53,17 @@ public class CommonUtils {
 		if (today) {
 
 			if (withSeconds) {
-				dateFormat = new SimpleDateFormat("'Today' '@' HH:mm:ss");
+				dateFormat = new SimpleDateFormat("'Today' '@' HH:mm:ss", Locale.ENGLISH);
 			} else {
-				dateFormat = new SimpleDateFormat("'Today' '@' HH:mm");
+				dateFormat = new SimpleDateFormat("'Today' '@' HH:mm", Locale.ENGLISH);
 			}
 
 		} else if (yesterday) {
 
 			if (withSeconds) {
-				dateFormat = new SimpleDateFormat("'Yesterday' '@' HH:mm:ss");
+				dateFormat = new SimpleDateFormat("'Yesterday' '@' HH:mm:ss", Locale.ENGLISH);
 			} else {
-				dateFormat = new SimpleDateFormat("'Yesterday' '@' HH:mm");
+				dateFormat = new SimpleDateFormat("'Yesterday' '@' HH:mm", Locale.ENGLISH);
 			}
 
 		}
@@ -83,18 +84,18 @@ public class CommonUtils {
 		boolean yesterday = calendar.get(Calendar.YEAR) == previous.get(Calendar.YEAR) && calendar.get(Calendar.DAY_OF_YEAR) == previous.get(Calendar.DAY_OF_YEAR);
 		boolean withInWeek = calendar.get(Calendar.YEAR) == week.get(Calendar.YEAR) && ((calendar.get(Calendar.DAY_OF_YEAR) - week.get(Calendar.DAY_OF_YEAR)) < 7);
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy @ HH:mm");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy @ HH:mm", Locale.ENGLISH);
 
 		if (today) {
 
-			dateFormat = new SimpleDateFormat("'Today' @ HH:mm");
+			dateFormat = new SimpleDateFormat("'Today' @ HH:mm", Locale.ENGLISH);
 
 		} else if (yesterday) {
 
-			dateFormat = new SimpleDateFormat("'Yesterday' @ HH:mm");
+			dateFormat = new SimpleDateFormat("'Yesterday' @ HH:mm", Locale.ENGLISH);
 
 		} else if (withInWeek) {
-			dateFormat = new SimpleDateFormat("EEEE @ HH:mm");
+			dateFormat = new SimpleDateFormat("EEEE @ HH:mm", Locale.ENGLISH);
 		}
 
 		return dateFormat.format(calendar.getTime());
@@ -265,9 +266,9 @@ public class CommonUtils {
 	    
 	}
 
-	public static Calendar getLaravelDate(String updated_at) {
+	public static Calendar getISO8601Date(String updated_at) {
 
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH);
 		Calendar calendar = Calendar.getInstance();
 
 		try {
@@ -278,4 +279,5 @@ public class CommonUtils {
 
 		return calendar;
 	}
+
 }

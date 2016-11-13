@@ -2,7 +2,6 @@ package com.oasis.firebird.core;
 
 import java.util.Map;
 
-@Deprecated
 public class ErrorMessage {
 
 	private String tag;

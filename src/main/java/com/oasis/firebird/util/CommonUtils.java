@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -243,6 +244,44 @@ public class CommonUtils {
 		return ids;
 		
 	}
+
+	public static String getString(List<String> ids) {
+
+		String string = "";
+
+		for (String id : ids) {
+			string += id + SEPERATOR;
+		}
+
+		if (string.length() >= 1) {
+			string = string.substring(0, string.length() - 1);
+		}
+
+		return string.equals("") ? null : string;
+
+	}
+
+	public static List<String> getList(String string) {
+
+		List<String> ids = new ArrayList<>();
+
+		if (string != null) {
+
+			String[] split = string.split(SEPERATOR);
+
+			for (String s : split) {
+
+				if (s.length() > 0) {
+					ids.add(s);
+				}
+
+			}
+
+		}
+
+		return ids;
+
+	}
 	
 	public static long getDaysSince(Calendar calendar) {
 
@@ -266,18 +305,25 @@ public class CommonUtils {
 	    
 	}
 
-	public static Calendar getISO8601Date(String updated_at) {
+	public static Calendar getISO8601Date(String date) {
 
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH);
 		Calendar calendar = Calendar.getInstance();
 
 		try {
-			calendar.setTimeInMillis(simpleDateFormat.parse(updated_at).getTime());
+			calendar.setTimeInMillis(simpleDateFormat.parse(date).getTime());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
 		return calendar;
+	}
+
+	public static String getISO8601Date(Calendar date) {
+
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH);
+		return simpleDateFormat.format(date.getTime());
+
 	}
 
 }

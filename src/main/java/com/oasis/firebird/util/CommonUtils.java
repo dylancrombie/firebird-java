@@ -8,7 +8,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +24,7 @@ public class CommonUtils {
 	private static final int ITERATION_INDEX = 0;
 	private static final int SALT_INDEX = 1;
 	private static final int PBKDF2_INDEX = 2;
-	private static final String SEPERATOR = ",";
+	private static final String SEPARATOR = ",";
 
 	public static String getSimpleCalendarDescription(Calendar calendar) {
 
@@ -83,9 +82,9 @@ public class CommonUtils {
 
 		boolean today = calendar.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && calendar.get(Calendar.DAY_OF_YEAR) == Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
 		boolean yesterday = calendar.get(Calendar.YEAR) == previous.get(Calendar.YEAR) && calendar.get(Calendar.DAY_OF_YEAR) == previous.get(Calendar.DAY_OF_YEAR);
-		boolean withInWeek = calendar.get(Calendar.YEAR) == week.get(Calendar.YEAR) && ((calendar.get(Calendar.DAY_OF_YEAR) - week.get(Calendar.DAY_OF_YEAR)) < 7);
+		boolean withInWeek = calendar.get(Calendar.YEAR) == week.get(Calendar.YEAR) && (calendar.get(Calendar.DAY_OF_YEAR) > week.get(Calendar.DAY_OF_YEAR)) && ((calendar.get(Calendar.DAY_OF_YEAR) - week.get(Calendar.DAY_OF_YEAR)) < 7);
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy @ HH:mm", Locale.ENGLISH);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy @ HH:mm", Locale.ENGLISH);
 
 		if (today) {
 
@@ -242,7 +241,7 @@ public class CommonUtils {
 		String string = "";
 		
 		for (Long id : ids) {
-			string += id + SEPERATOR;
+			string += id + SEPARATOR;
 		}
 
 		if (string.length() >= 1) {
@@ -259,7 +258,7 @@ public class CommonUtils {
 		
 		if (string != null) {
 		
-			String[] split = string.split(SEPERATOR);
+			String[] split = string.split(SEPARATOR);
 		
 			for (String s : split) {
 				
@@ -280,7 +279,7 @@ public class CommonUtils {
 		String string = "";
 
 		for (String id : ids) {
-			string += id + SEPERATOR;
+			string += id + SEPARATOR;
 		}
 
 		if (string.length() >= 1) {
@@ -297,7 +296,7 @@ public class CommonUtils {
 
 		if (string != null) {
 
-			String[] split = string.split(SEPERATOR);
+			String[] split = string.split(SEPARATOR);
 
 			for (String s : split) {
 

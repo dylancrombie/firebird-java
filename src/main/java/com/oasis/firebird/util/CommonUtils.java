@@ -103,6 +103,36 @@ public class CommonUtils {
 
 	}
 
+	public static String getSimpleCalendarDateName(Calendar calendar) {
+
+		Calendar previous = Calendar.getInstance();
+		previous.add(Calendar.DAY_OF_YEAR, -1);
+
+		Calendar week = Calendar.getInstance();
+		week.add(Calendar.DAY_OF_YEAR, -7);
+
+		boolean today = calendar.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && calendar.get(Calendar.DAY_OF_YEAR) == Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
+		boolean yesterday = calendar.get(Calendar.YEAR) == previous.get(Calendar.YEAR) && calendar.get(Calendar.DAY_OF_YEAR) == previous.get(Calendar.DAY_OF_YEAR);
+		boolean withInWeek = calendar.get(Calendar.YEAR) == week.get(Calendar.YEAR) && (calendar.get(Calendar.DAY_OF_YEAR) > week.get(Calendar.DAY_OF_YEAR)) && ((calendar.get(Calendar.DAY_OF_YEAR) - week.get(Calendar.DAY_OF_YEAR)) < 7);
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH);
+
+		if (today) {
+
+			dateFormat = new SimpleDateFormat("'Today'", Locale.ENGLISH);
+
+		} else if (yesterday) {
+
+			dateFormat = new SimpleDateFormat("'Yesterday'", Locale.ENGLISH);
+
+		} else if (withInWeek) {
+			dateFormat = new SimpleDateFormat("EEEE", Locale.ENGLISH);
+		}
+
+		return dateFormat.format(calendar.getTime());
+
+	}
+
 	public static Integer getPercentage(Integer total, Integer count) {
 
 		double fraction = (double) count / (double) total;

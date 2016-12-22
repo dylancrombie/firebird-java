@@ -132,6 +132,27 @@ public class CommonUtils {
 
 	}
 
+	public static String getSimpleCalendarMonth(Calendar calendar) {
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MMM", Locale.ENGLISH);
+		return dateFormat.format(calendar.getTime());
+
+	}
+
+	public static String getSimpleCalendarDay(Calendar calendar) {
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("d", Locale.ENGLISH);
+		return dateFormat.format(calendar.getTime());
+
+	}
+
+	public static String getSimpleCalendarYear(Calendar calendar) {
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy", Locale.ENGLISH);
+		return dateFormat.format(calendar.getTime());
+
+	}
+
 	public static Integer getPercentage(Integer total, Integer count) {
 
 		double fraction = (double) count / (double) total;

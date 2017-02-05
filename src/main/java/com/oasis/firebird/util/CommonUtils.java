@@ -376,4 +376,19 @@ public class CommonUtils {
 
 	}
 
+	public static Size resize(int width, int height, int size) {
+
+		float ratio = (float) width / (float) height;
+
+		int w = size;
+		int h = size;
+
+		if (width > height) {
+			h = (int) (ratio * ((float) size));
+		} else if (width < height) {
+			w = (int) (ratio * ((float) size));
+		}
+		return new Size(w, h);
+	}
+
 }

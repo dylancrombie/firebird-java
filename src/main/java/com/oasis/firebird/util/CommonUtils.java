@@ -114,7 +114,7 @@ public class CommonUtils {
 		boolean yesterday = calendar.get(Calendar.YEAR) == previous.get(Calendar.YEAR) && calendar.get(Calendar.DAY_OF_YEAR) == previous.get(Calendar.DAY_OF_YEAR);
 		boolean withInWeek = calendar.get(Calendar.YEAR) == week.get(Calendar.YEAR) && (calendar.get(Calendar.DAY_OF_YEAR) > week.get(Calendar.DAY_OF_YEAR)) && ((calendar.get(Calendar.DAY_OF_YEAR) - week.get(Calendar.DAY_OF_YEAR)) < 7);
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
 
 		if (today) {
 
@@ -123,6 +123,36 @@ public class CommonUtils {
 		} else if (yesterday) {
 
 			dateFormat = new SimpleDateFormat("'Yesterday'", Locale.ENGLISH);
+
+		} else if (withInWeek) {
+			dateFormat = new SimpleDateFormat("EEEE", Locale.ENGLISH);
+		}
+
+		return dateFormat.format(calendar.getTime());
+
+	}
+
+	public static String getSimpleCalendarDateNameFuture(Calendar calendar) {
+
+		Calendar next = Calendar.getInstance();
+		next.add(Calendar.DAY_OF_YEAR, 1);
+
+		Calendar week = Calendar.getInstance();
+		week.add(Calendar.DAY_OF_YEAR, 7);
+
+		boolean today = calendar.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && calendar.get(Calendar.DAY_OF_YEAR) == Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
+		boolean tomorrow = calendar.get(Calendar.YEAR) == next.get(Calendar.YEAR) && calendar.get(Calendar.DAY_OF_YEAR) == next.get(Calendar.DAY_OF_YEAR);
+		boolean withInWeek = calendar.get(Calendar.YEAR) == week.get(Calendar.YEAR) && (calendar.get(Calendar.DAY_OF_YEAR) > week.get(Calendar.DAY_OF_YEAR)) && ((calendar.get(Calendar.DAY_OF_YEAR) - week.get(Calendar.DAY_OF_YEAR)) < 7);
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
+
+		if (today) {
+
+			dateFormat = new SimpleDateFormat("'Today'", Locale.ENGLISH);
+
+		} else if (tomorrow) {
+
+			dateFormat = new SimpleDateFormat("'Tomorrow'", Locale.ENGLISH);
 
 		} else if (withInWeek) {
 			dateFormat = new SimpleDateFormat("EEEE", Locale.ENGLISH);

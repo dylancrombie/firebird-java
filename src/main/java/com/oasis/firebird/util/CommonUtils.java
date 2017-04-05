@@ -431,7 +431,7 @@ public class CommonUtils {
 		long endTime = endDate.getTime();
 		long diffTime = endTime - startTime;
 
-		return diffTime / (1000 * 60 * 60 * 24);
+		return (diffTime / (1000 * 60 * 60 * 24)) + 1;
 
 	}
 

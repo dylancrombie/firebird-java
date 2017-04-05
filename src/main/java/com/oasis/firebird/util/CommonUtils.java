@@ -4,10 +4,12 @@ import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -419,6 +421,18 @@ public class CommonUtils {
 			w = (int) (ratio * ((float) size));
 		}
 		return new Size(w, h);
+	}
+
+	public static long getDaysBetween(Calendar start, Calendar end) {
+
+		Date startDate = start.getTime();
+		Date endDate = end.getTime();
+		long startTime = startDate.getTime();
+		long endTime = endDate.getTime();
+		long diffTime = endTime - startTime;
+
+		return diffTime / (1000 * 60 * 60 * 24);
+
 	}
 
 }

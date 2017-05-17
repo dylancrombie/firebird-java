@@ -110,11 +110,11 @@ public class CommonUtils {
 		previous.add(Calendar.DAY_OF_YEAR, -1);
 
 		Calendar week = Calendar.getInstance();
-		week.add(Calendar.DAY_OF_YEAR, -7);
+		week.add(Calendar.DAY_OF_YEAR, 7);
 
 		boolean today = calendar.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && calendar.get(Calendar.DAY_OF_YEAR) == Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
 		boolean yesterday = calendar.get(Calendar.YEAR) == previous.get(Calendar.YEAR) && calendar.get(Calendar.DAY_OF_YEAR) == previous.get(Calendar.DAY_OF_YEAR);
-		boolean withInWeek = calendar.get(Calendar.YEAR) == week.get(Calendar.YEAR) && (calendar.get(Calendar.DAY_OF_YEAR) > week.get(Calendar.DAY_OF_YEAR)) && ((calendar.get(Calendar.DAY_OF_YEAR) - week.get(Calendar.DAY_OF_YEAR)) < 7);
+		boolean withInWeek = calendar.get(Calendar.YEAR) == week.get(Calendar.YEAR) && ((week.get(Calendar.DAY_OF_YEAR) - calendar.get(Calendar.DAY_OF_YEAR)) < 7) && ((week.get(Calendar.DAY_OF_YEAR) - calendar.get(Calendar.DAY_OF_YEAR)) > 0);
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
 
@@ -433,6 +433,18 @@ public class CommonUtils {
 
 		return (diffTime / (1000 * 60 * 60 * 24)) + 1;
 
+	}
+
+	public static int nullSafeStringComparator(final String one, final String two) {
+		if (one == null ^ two == null) {
+			return (one == null) ? -1 : 1;
+		}
+
+		if (one == null && two == null) {
+			return 0;
+		}
+
+		return one.compareToIgnoreCase(two);
 	}
 
 }

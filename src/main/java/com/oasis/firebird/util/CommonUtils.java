@@ -4,7 +4,6 @@ import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -445,6 +444,16 @@ public class CommonUtils {
 		}
 
 		return one.compareToIgnoreCase(two);
+	}
+
+	public static Double trimDouble(String f) {
+
+		f = f.replace(",", "");
+		f = f.replace(" ", "");
+		f = f.replace("[^0-9.]+", "");
+
+		return Double.valueOf(f);
+
 	}
 
 }

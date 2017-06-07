@@ -451,6 +451,7 @@ public class CommonUtils {
 		f = f.replace(",", "");
 		f = f.replace(" ", "");
 		f = f.replace("[^0-9.]+", "");
+		f = f.replaceAll("\\s+","");
 
 		return Double.valueOf(f);
 

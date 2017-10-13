@@ -115,7 +115,7 @@ public class CommonUtils {
 		boolean yesterday = calendar.get(Calendar.YEAR) == previous.get(Calendar.YEAR) && calendar.get(Calendar.DAY_OF_YEAR) == previous.get(Calendar.DAY_OF_YEAR);
 		boolean withInWeek = calendar.get(Calendar.YEAR) == week.get(Calendar.YEAR) && ((week.get(Calendar.DAY_OF_YEAR) - calendar.get(Calendar.DAY_OF_YEAR)) < 7) && ((week.get(Calendar.DAY_OF_YEAR) - calendar.get(Calendar.DAY_OF_YEAR)) > 0);
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
 
 		if (today) {
 
